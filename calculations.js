@@ -1,6 +1,4 @@
-// ============================================================================
-// LOAD CALCULATION FUNCTIONS
-// ============================================================================
+// calculations.js - Load Calculation Functions
 
 function getThreatLoad() {
     let threatTotal = 0;
@@ -160,6 +158,64 @@ function validateSave() {
     return errors;
 }
 
+function resetAllSliders() {
+    // Reset baseline
+    Object.keys(state.baseline).forEach(key => {
+        if (!state.baseline[key].locked) {
+            state.baseline[key].value = 0;
+            state.baseline[key].interacted = false;
+        }
+    });
+
+    // Reset internal self
+    Object.keys(state.internalSelf).forEach(key => {
+        if (!state.internalSelf[key].locked) {
+            state.internalSelf[key].value = 0;
+            state.internalSelf[key].interacted = false;
+        }
+    });
+
+    // Reset external areas
+    Object.keys(state.externalAreas).forEach(key => {
+        if (!state.externalAreas[key].locked) {
+            state.externalAreas[key].value = 0;
+            state.externalAreas[key].interacted = false;
+        }
+    });
+
+    // Reset supports
+    Object.keys(state.supports).forEach(key => {
+        if (!state.supports[key].locked) {
+            state.supports[key].value = 0;
+            state.supports[key].interacted = false;
+        }
+    });
+
+    // Reset custom sliders
+    state.customExternal.forEach(slider => {
+        if (!slider.locked) {
+            slider.value = 0;
+            slider.interacted = false;
+        }
+    });
+
+    state.customSupports.forEach(slider => {
+        if (!slider.locked) {
+            slider.value = 0;
+            slider.interacted = false;
+        }
+    });
+
+    // Reset ambient sliders - keep first one, reset it
+    state.ambient = [{
+        id: Date.now(),
+        value: 0,
+        type: 'opportunity',
+        note: '',
+        locked: false
+    }];
+}
+
 async function saveEntry() {
     const errors = validateSave();
     if (errors.length > 0) {
@@ -236,6 +292,9 @@ async function saveEntry() {
     
     state.entries.unshift(entry);
     saveToUserStorage('entries', JSON.stringify(state.entries));
+
+    // RESET ALL SLIDERS after saving
+    resetAllSliders();
 
     render();
     displayEntries();
