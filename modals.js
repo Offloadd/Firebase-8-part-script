@@ -1,6 +1,4 @@
-// ============================================================================
-// MODAL AND VISUALIZATION FUNCTIONS
-// ============================================================================
+// modals.js - Modal and Visualization Functions
 
 function openIntroModal() {
     document.getElementById('introModal').classList.add('active');
@@ -16,6 +14,11 @@ function openInfoModal(modalId) {
 
 function closeInfoModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
+}
+
+function updateVisualOpacity(value) {
+    state.visualOpacity = parseFloat(value);
+    render();
 }
 
 function saveModalContent(modalId) {
