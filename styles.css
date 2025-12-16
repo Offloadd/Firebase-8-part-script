@@ -503,65 +503,16 @@ textarea {
     background: #d1fae5;
 }
 
-/* User Badge and Logout - Left Side Vertical Stack */
+/* User Badge and Logout - Removed fixed positioning */
 #logoutBtn {
-    display: none;
-    position: fixed;
-    left: 10px;
-    top: 60px;
-    padding: 6px 10px;
-    background: #dc2626;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    z-index: 1000;
-    font-weight: 600;
-    font-size: 12px;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-}
-
-#logoutBtn:hover {
-    background: #991b1b;
+    /* Styling now handled inline in render.js */
 }
 
 .user-badge {
-    position: fixed;
-    left: 10px;
-    top: 10px;
-    padding: 6px 10px;
-    background: white;
-    border: 2px solid #3b82f6;
-    border-radius: 4px;
-    font-size: 11px;
-    color: #3b82f6;
-    font-weight: 600;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: none;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    max-width: 40px;
-    word-break: break-all;
+    display: none !important;
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-    #logoutBtn {
-        left: 5px;
-        top: 50px;
-        padding: 4px 8px;
-        font-size: 10px;
-    }
-    
-    .user-badge {
-        left: 5px;
-        top: 5px;
-        padding: 4px 8px;
-        font-size: 10px;
-        max-width: 35px;
-    }
+    /* Removed mobile-specific auth styles */
 }
