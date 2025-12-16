@@ -503,12 +503,13 @@ textarea {
     background: #d1fae5;
 }
 
+/* User Badge and Logout - Left Side Vertical Stack */
 #logoutBtn {
     display: none;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 8px 16px;
+    left: 10px;
+    top: 60px;
+    padding: 6px 10px;
     background: #dc2626;
     color: white;
     border: none;
@@ -516,6 +517,10 @@ textarea {
     cursor: pointer;
     z-index: 1000;
     font-weight: 600;
+    font-size: 12px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
 }
 
 #logoutBtn:hover {
@@ -524,16 +529,39 @@ textarea {
 
 .user-badge {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 8px 12px;
+    left: 10px;
+    top: 10px;
+    padding: 6px 10px;
     background: white;
     border: 2px solid #3b82f6;
     border-radius: 4px;
-    font-size: 13px;
+    font-size: 11px;
     color: #3b82f6;
     font-weight: 600;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: none;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    max-width: 40px;
+    word-break: break-all;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    #logoutBtn {
+        left: 5px;
+        top: 50px;
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+    
+    .user-badge {
+        left: 5px;
+        top: 5px;
+        padding: 4px 8px;
+        font-size: 10px;
+        max-width: 35px;
+    }
 }
