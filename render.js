@@ -259,19 +259,6 @@ function renderPart2() {
                 '<div class="gate-text-bottom" id="gateTextBottom">OPPORTUNITY<br>0</div>' +
                 '<div class="river-text" id="riverText">Window of Tolerance Width<br>or Internal Information<br>Processing Capacity</div>' +
             '</div>' +
-            '<div style="margin-top: 12px; padding: 10px; background: #f9fafb; border-radius: 6px;">' +
-                '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">' +
-                    '<span style="font-weight: 600; font-size: 13px; color: #374151;">Color Brightness</span>' +
-                    '<span style="font-weight: 600; font-size: 14px; color: #111827;">' + Math.round((1 - state.visualOpacity) * 100) + '%</span>' +
-                '</div>' +
-                '<input type="range" min="0" max="1" step="0.05" value="' + state.visualOpacity + '" ' +
-                       'onchange="updateVisualOpacity(this.value)" ' +
-                       'style="width: 100%; background: linear-gradient(to right, #fbbf24 0%, #a855f7 50%, #3b82f6 100%);">' +
-                '<div style="display: flex; justify-content: space-between; font-size: 10px; color: #6b7280; margin-top: 2px;">' +
-                    '<span>Dim (more white)</span>' +
-                    '<span>Bright (less white)</span>' +
-                '</div>' +
-            '</div>' +
         '</div>' +
 
         '<div class="card" style="border: 1px solid #16a34a;">' +
