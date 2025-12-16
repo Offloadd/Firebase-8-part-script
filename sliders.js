@@ -2,6 +2,12 @@
 // SLIDER UPDATE AND TOGGLE FUNCTIONS
 // ============================================================================
 
+function toggleAreaVisible(category, key) {
+    state[category][key].visible = !state[category][key].visible;
+    saveState();
+    render();
+}
+
 function toggleLock(category, key) {
     state[category][key].locked = !state[category][key].locked;
     render();
