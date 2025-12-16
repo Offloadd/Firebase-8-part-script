@@ -116,7 +116,7 @@ function renderEntry(entry, index) {
                         Stress: ${stressPercent}% | Stabilized: ${regulatedPercent}% | Opportunity: ${opportunityPercent}%
                     </div>
                     <div style="font-size: 13px; color: #9ca3af; margin-top: 2px;">
-                        Stressor Presence: ${entry.threatLoad} | Stabilizer Presence: ${entry.regulatedLoad} | Opportunity Presence: ${entry.opportunityLoad}
+                        Stressor Amount: ${entry.threatLoad} | Stabilizer Amount: ${entry.regulatedLoad} | Opportunity Amount: ${entry.opportunityLoad}
                     </div>
                 </div>
                 <button onclick="deleteEntry(${index})" style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">
@@ -169,7 +169,7 @@ function copyLast20Entries() {
         return;
     }
 
-    let csv = 'Timestamp,Stress %,Stabilized %,Opportunity %,Stressor Presence,Stabilizer Presence,Opportunity Presence,Changed Areas,Specific Experiences\n';
+    let csv = 'Timestamp,Stress %,Stabilized %,Opportunity %,Stressor Amount,Stabilizer Amount,Opportunity Amount,Changed Areas,Specific Experiences\n';
 
     entriesToCopy.forEach(entry => {
         const date = new Date(entry.timestamp);
