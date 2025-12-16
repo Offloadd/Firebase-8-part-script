@@ -262,18 +262,21 @@ function renderPart2() {
         '</div>' +
 
         '<div class="card" style="border: 1px solid #16a34a;">' +
-            '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">' +
+            '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">' +
                 '<div style="display: flex; align-items: center; gap: 12px;">' +
                     '<h2 style="margin: 0;">💾 Current Entry</h2>' +
                     '<button class="btn" onclick="openInfoModal(\'infoModal3\')" style="padding: 6px 12px; font-size: 13px; background: #6366f1; color: white; white-space: nowrap;">ℹ️ Info</button>' +
                 '</div>' +
-                '<button class="btn" onclick="saveEntry()" style="background: #16a34a; color: white; white-space: nowrap; padding: 10px 20px;">💾 Save Entry & Reset Sliders</button>' +
+                '<div style="display: flex; gap: 8px; flex-wrap: wrap;">' +
+                    '<button class="btn" onclick="saveEntry()" style="background: #16a34a; color: white; white-space: nowrap; padding: 10px 20px; font-size: 14px;">💾 Save Entry</button>' +
+                    '<button class="btn" onclick="resetAllSliders(); render();" style="background: #f97316; color: white; white-space: nowrap; padding: 10px 20px; font-size: 14px;">🔄 Reset Sliders</button>' +
+                '</div>' +
             '</div>' +
             (state.saveError ? '<div style="color: #dc2626; margin-bottom: 12px;">' + state.saveError + '</div>' : '') +
             '<div style="display: flex; gap: 20px;">' +
                 '<div style="flex: 1;">' +
                     '<div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">' +
-                        'Threat: ' + getThreatLoad() + ' | Opportunity: ' + getOpportunityLoad() + ' | Regulated: ' + getRegulatedLoad() +
+                        'Stressor: ' + getThreatLoad() + ' | Opportunity: ' + getOpportunityLoad() + ' | Stabilizer: ' + getRegulatedLoad() +
                     '</div>' +
                     '<div style="font-size: 14px; color: #6b7280;" id="currentPercentages">' +
                         'Calculating percentages...' +
