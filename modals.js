@@ -104,20 +104,24 @@ function updateVisualization(threatLoad, opportunityLoad, regulatedLoad) {
 
     const height = 300;
     const maxLoad = 50;
-    const minGateHeight = 30;
+    const minGateHeight = 30;  // 10% minimum
     
     // Starting percentages when no load: 20% stress, 60% regulated, 20% opportunity
     const baseStressHeight = height * 0.20;  // 20% for stress
     const baseOpportunityHeight = height * 0.20;  // 20% for opportunity
 
+    // Regulated load reduces BOTH gates proportionally
     const regulatedReduction = regulatedLoad * 2;
 
-    let topGateHeight = baseStressHeight + Math.max(0, Math.min((threatLoad / maxLoad) * height * 1.8, height * 0.9) - regulatedReduction);
-    let bottomGateHeight = baseOpportunityHeight + Math.max(0, Math.min((opportunityLoad / maxLoad) * height * 1.8, height * 0.9) - regulatedReduction);
+    // Calculate threat expansion
+    const threatExpansion = Math.max(0, Math.min((threatLoad / maxLoad) * height * 1.8, height * 0.9));
+    
+    // Calculate opportunity expansion  
+    const opportunityExpansion = Math.max(0, Math.min((opportunityLoad / maxLoad) * height * 1.8, height * 0.9));
 
-    // Keep minimum heights
-    topGateHeight = Math.max(minGateHeight, topGateHeight);
-    bottomGateHeight = Math.max(minGateHeight, bottomGateHeight);
+    // Apply base + expansion - regulated reduction, respecting minimums
+    let topGateHeight = Math.max(minGateHeight, baseStressHeight + threatExpansion - regulatedReduction);
+    let bottomGateHeight = Math.max(minGateHeight, baseOpportunityHeight + opportunityExpansion - regulatedReduction);
 
     const combinedHeight = topGateHeight + bottomGateHeight;
     const maxCombined = height * 0.9;
