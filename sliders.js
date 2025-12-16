@@ -7,12 +7,6 @@ function toggleLock(category, key) {
     render();
 }
 
-function toggleAreaVisible(category, key) {
-    state[category][key].visible = !state[category][key].visible;
-    saveState();
-    render();
-}
-
 function toggleSliderEdit(category, key) {
     state[category][key].editing = !state[category][key].editing;
     render();
