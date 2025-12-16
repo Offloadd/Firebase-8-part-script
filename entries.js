@@ -113,10 +113,10 @@ function renderEntry(entry, index) {
                 <div>
                     <div style="font-weight: 600; color: #111827; margin-bottom: 4px;">${formattedDate}</div>
                     <div style="font-size: 14px; color: #6b7280;">
-                        Stress: ${stressPercent}% | Regulated: ${regulatedPercent}% | Opportunity: ${opportunityPercent}%
+                        Stress: ${stressPercent}% | Stabilized: ${regulatedPercent}% | Opportunity: ${opportunityPercent}%
                     </div>
                     <div style="font-size: 13px; color: #9ca3af; margin-top: 2px;">
-                        Threat Load: ${entry.threatLoad} | Regulated: ${entry.regulatedLoad} | Opportunity: ${entry.opportunityLoad}
+                        Stressor Presence: ${entry.threatLoad} | Stabilizer Presence: ${entry.regulatedLoad} | Opportunity Presence: ${entry.opportunityLoad}
                     </div>
                 </div>
                 <button onclick="deleteEntry(${index})" style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 13px;">
@@ -169,7 +169,7 @@ function copyLast20Entries() {
         return;
     }
 
-    let csv = 'Timestamp,Stress %,Regulated %,Opportunity %,Threat Load,Regulated Load,Opportunity Load,Changed Areas,Specific Experiences\n';
+    let csv = 'Timestamp,Stress %,Stabilized %,Opportunity %,Stressor Presence,Stabilizer Presence,Opportunity Presence,Changed Areas,Specific Experiences\n';
 
     entriesToCopy.forEach(entry => {
         const date = new Date(entry.timestamp);
