@@ -16,11 +16,6 @@ function closeInfoModal(modalId) {
     document.getElementById(modalId).classList.remove('active');
 }
 
-function updateVisualOpacity(value) {
-    state.visualOpacity = parseFloat(value);
-    render();
-}
-
 function saveModalContent(modalId) {
     let contentDiv;
     contentDiv = document.getElementById(modalId);
@@ -194,7 +189,8 @@ function updateVisualization(threatLoad, opportunityLoad, regulatedLoad) {
         oppB = Math.round(68 - (0 * factor));
     }
 
-    const opacity = state.visualOpacity;
+    // Full brightness - no opacity adjustment needed (opacity = 0)
+    const opacity = 0;
     threatR = Math.round(threatR + (255 - threatR) * opacity);
     threatG = Math.round(threatG + (255 - threatG) * opacity);
     threatB = Math.round(threatB + (255 - threatB) * opacity);
