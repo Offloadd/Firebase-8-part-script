@@ -285,6 +285,10 @@ function renderPart2() {
             '</div>' +
         '</div>' +
 
+        '<div class="card" style="text-align: center; padding: 12px; border: 1px solid #dc2626;">' +
+            '<button id="logoutBtn" onclick="handleLogout()" style="width: 100%; padding: 10px 20px; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; display: block;">🚪 Logout</button>' +
+        '</div>' +
+
         '<div class="card">' +
             '<div id="entriesContainer"></div>' +
         '</div>';
