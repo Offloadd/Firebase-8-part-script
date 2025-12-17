@@ -87,10 +87,15 @@ function updateAmbient(id, field, value) {
 
     if (field === 'value') {
         amb.value = parseInt(value);
+        // Only update visualization, don't re-render entire page
+        const threatLoad = getThreatLoad();
+        const opportunityLoad = getOpportunityLoad();
+        const regulatedLoad = getRegulatedLoad();
+        updateVisualization(threatLoad, opportunityLoad, regulatedLoad);
     } else {
         amb[field] = value;
+        // No render needed for text/type changes - they're already in the DOM
     }
-    render();
 }
 
 // ============================================================================
