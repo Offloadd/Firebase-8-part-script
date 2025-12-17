@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/styles.css << 'ENDFILE'
 * { 
     margin: 0; 
     padding: 0; 
@@ -517,5 +516,3 @@ textarea {
 @media (max-width: 768px) {
     /* Removed mobile-specific auth styles */
 }
-ENDFILE
-echo "styles.css created"
