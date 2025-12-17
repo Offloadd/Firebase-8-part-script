@@ -87,14 +87,35 @@ function updateAmbient(id, field, value) {
 
     if (field === 'value') {
         amb.value = parseInt(value);
-        // Only update visualization, don't re-render entire page
+        // Update visualization
         const threatLoad = getThreatLoad();
         const opportunityLoad = getOpportunityLoad();
         const regulatedLoad = getRegulatedLoad();
         updateVisualization(threatLoad, opportunityLoad, regulatedLoad);
+        
+        // Update the number display - find all slider values and update the one that matches this ambient item
+        const allSliderValues = document.querySelectorAll('.slider-value');
+        allSliderValues.forEach(span => {
+            // Check if this is the right slider by checking if its parent contains our slider input
+            const container = span.closest('.slider-container');
+            if (container) {
+                const rangeInput = container.querySelector('input[type="range"]');
+                if (rangeInput && rangeInput.value == value) {
+                    // Additional check: make sure it's an ambient slider by checking the oninput attribute
+                    const oninputAttr = rangeInput.getAttribute('oninput');
+                    if (oninputAttr && oninputAttr.includes('updateAmbient(' + id)) {
+                        span.textContent = value;
+                    }
+                }
+            }
+        });
     } else {
         amb[field] = value;
-        // No render needed for text/type changes - they're already in the DOM
+        // For type changes, we need to re-render to update button colors and slider gradient
+        if (field === 'type') {
+            render();
+        }
+        // Note changes don't need re-render - they're already in the textarea
     }
 }
 
