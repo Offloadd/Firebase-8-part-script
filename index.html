@@ -40,7 +40,9 @@
                document.getElementById('userEmail').textContent = user.email;
                window.currentUser = user;
                loadState();
-               loadFromFirestore().then(() => render());
+               loadCustomSlidersFromFirestore().then(() => {
+                   loadFromFirestore().then(() => render());
+               });
            } else {
                document.getElementById('authContainer').style.display = 'block';
                document.getElementById('app').style.display = 'none';
