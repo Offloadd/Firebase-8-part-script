@@ -93,6 +93,10 @@ function updateAmbient(id, field, value) {
     render();
 }
 
+// ============================================================================
+// CUSTOM SLIDER FUNCTIONS - WITH FIRESTORE SYNC
+// ============================================================================
+
 function addCustomSlider(section) {
     const customArray = section === 'external' ? state.customExternal : state.customSupports;
     customArray.push({
@@ -107,6 +111,7 @@ function addCustomSlider(section) {
         visible: true
     });
     saveState();
+    saveCustomSlidersToFirestore(); // SAVE TO FIRESTORE
     render();
 }
 
@@ -116,6 +121,7 @@ function toggleCustomEdit(section, id) {
     if (slider) {
         slider.editing = !slider.editing;
         saveState();
+        saveCustomSlidersToFirestore(); // SAVE TO FIRESTORE
         render();
     }
 }
@@ -133,6 +139,7 @@ function saveCustomSlider(section, id, label, posLabel, negLabel) {
             slider.locked = !slider.locked;
         }
         saveState();
+        saveCustomSlidersToFirestore(); // SAVE TO FIRESTORE
         render();
     }
 }
@@ -144,6 +151,7 @@ function deleteCustomSlider(section, id) {
         state.customSupports = state.customSupports.filter(s => s.id !== id);
     }
     saveState();
+    saveCustomSlidersToFirestore(); // SAVE TO FIRESTORE
     render();
 }
 
@@ -153,6 +161,7 @@ function toggleCustomVisible(section, id) {
     if (slider) {
         slider.visible = !slider.visible;
         saveState();
+        saveCustomSlidersToFirestore(); // SAVE TO FIRESTORE
         render();
     }
 }
@@ -164,6 +173,7 @@ function updateCustomSlider(section, id, value) {
         slider.value = parseInt(value);
         slider.interacted = true;
         saveState();
+        // Note: We don't save to Firestore on every slider movement, only on structural changes
         render();
     }
 }
