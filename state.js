@@ -6,6 +6,7 @@ const state = {
     section3Expanded: false,
     section4Expanded: false,
     visualOpacity: 0,  // Full brightness (0 = no white overlay)
+    legendEditing: false,  // Track if legend is in edit mode
     customExternal: [],
     customSupports: [],
     
