@@ -100,7 +100,7 @@ return '<div class="section-card section-teal ' + (state.section3Expanded ? 'exp
 '<div class="section-header">' +
 '<div>' +
 '<div class="section-title">3. Known Supports & Stabilizers</div>' +
-(state.section3Expanded ? '' : '<div class="section-subtitle">What's holding me?</div>') +
+(state.section3Expanded ? '' : '<div class="section-subtitle">What\'s holding me?</div>') +
 '</div>' +
 '<button class="expand-btn" onclick="event.stopPropagation(); toggleSection(3)" style="background: #3b82f6;">' +
 (state.section3Expanded ? 'Hide ▲' : 'Show ▼') +
