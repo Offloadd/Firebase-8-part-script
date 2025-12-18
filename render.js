@@ -224,7 +224,7 @@ state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('
                 '<div id="legendText" contenteditable="true" style="padding: 8px 4px; color: black; font-size: 9px; font-weight: bold; line-height: 1.3; text-align: center; z-index: 12; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; outline: none; cursor: text;">' +
                     '<div>Hopelessness<br>Powerlessness<br>Overwhelmed<br>Anger/Resentful<br>Easily Agitated</div>' +
                     '<div style="margin-top: 4px;">Drivenness<br>Worry/Anxiety<br>Hypervigilance<br>On Edge<br>Fear of Failure</div>' +
-                    '<div style="margin-top: 4px;">Rest is Forced<br>Deeper Sleep<br>Grounded<br>Calm/Regulated<br>Recovering</div>' +
+                    '<div style="margin-top: 4px;">Rest is Forced<br>Recovering<br>Grounded<br>Calm/Regulated<br>Quality Sleep</div>' +
                     '<div style="margin-top: 4px;">Flexibility<br>Joy/Enthusiasm<br>Expansiveness<br>Opportunity<br>Freedom</div>' +
                 '</div>' +
                 '<button onclick="saveLegendText()" style="position: absolute; bottom: 5px; right: 5px; padding: 4px 8px; background: #16a34a; color: white; border: none; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; z-index: 13;">💾 Save</button>' +
