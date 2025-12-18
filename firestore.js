@@ -101,7 +101,7 @@ function loadEntriesFromLocalStorage() {
 }
 
 // ============================================================================
-// CUSTOM SLIDERS FIRESTORE FUNCTIONS
+// CUSTOM SLIDERS AND VISIBILITY FIRESTORE FUNCTIONS
 // ============================================================================
 
 async function saveCustomSlidersToFirestore() {
@@ -115,6 +115,23 @@ async function saveCustomSlidersToFirestore() {
         const customSliders = {
             customExternal: state.customExternal,
             customSupports: state.customSupports,
+            // Add visibility states
+            baselineVisible: Object.keys(state.baseline).reduce((acc, key) => {
+                acc[key] = state.baseline[key].visible;
+                return acc;
+            }, {}),
+            internalSelfVisible: Object.keys(state.internalSelf).reduce((acc, key) => {
+                acc[key] = state.internalSelf[key].visible;
+                return acc;
+            }, {}),
+            externalAreasVisible: Object.keys(state.externalAreas).reduce((acc, key) => {
+                acc[key] = state.externalAreas[key].visible;
+                return acc;
+            }, {}),
+            supportsVisible: Object.keys(state.supports).reduce((acc, key) => {
+                acc[key] = state.supports[key].visible;
+                return acc;
+            }, {}),
             lastUpdated: new Date().toISOString()
         };
         
@@ -122,7 +139,7 @@ async function saveCustomSlidersToFirestore() {
             customSliders: customSliders
         }, { merge: true });
         
-        console.log('Custom sliders saved to Firestore');
+        console.log('Custom sliders and visibility states saved to Firestore');
     } catch (error) {
         console.error('Error saving custom sliders to Firestore:', error);
     }
@@ -148,7 +165,37 @@ async function loadCustomSlidersFromFirestore() {
                 state.customSupports = customSliders.customSupports;
             }
             
-            console.log('Loaded custom sliders from Firestore');
+            // Load visibility states
+            if (customSliders.baselineVisible) {
+                Object.keys(customSliders.baselineVisible).forEach(key => {
+                    if (state.baseline[key]) {
+                        state.baseline[key].visible = customSliders.baselineVisible[key];
+                    }
+                });
+            }
+            if (customSliders.internalSelfVisible) {
+                Object.keys(customSliders.internalSelfVisible).forEach(key => {
+                    if (state.internalSelf[key]) {
+                        state.internalSelf[key].visible = customSliders.internalSelfVisible[key];
+                    }
+                });
+            }
+            if (customSliders.externalAreasVisible) {
+                Object.keys(customSliders.externalAreasVisible).forEach(key => {
+                    if (state.externalAreas[key]) {
+                        state.externalAreas[key].visible = customSliders.externalAreasVisible[key];
+                    }
+                });
+            }
+            if (customSliders.supportsVisible) {
+                Object.keys(customSliders.supportsVisible).forEach(key => {
+                    if (state.supports[key]) {
+                        state.supports[key].visible = customSliders.supportsVisible[key];
+                    }
+                });
+            }
+            
+            console.log('Loaded custom sliders and visibility states from Firestore');
             
             // Save to localStorage as backup
             saveState();
