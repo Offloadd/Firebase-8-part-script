@@ -271,8 +271,10 @@ textarea {
     width: 80px;
     background: linear-gradient(to bottom,
         #ff4444 0%,
-        #ffaa44 33%,
-        #4488ff 66%,
+        #ff4444 5%,
+        #ffaa44 30%,
+        #ffeb3b 40%,
+        #4488ff 60%,
         #44ff44 100%);
     border: 2px solid #333;
     border-radius: 5px;
