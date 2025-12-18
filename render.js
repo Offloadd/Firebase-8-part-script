@@ -90,7 +90,7 @@ const opportunityLoad = getOpportunityLoad();
 const regulatedLoad = getRegulatedLoad();
 setTimeout(() => updateVisualization(threatLoad, opportunityLoad, regulatedLoad), 0);
 displayEntries();
-loadLegendText();
+loadLegendFromFirestore();
 }
 
 // render.js - Part 2 Helper Function (Sections 3-4, Visualization, Save Button)
@@ -221,13 +221,13 @@ state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('
         '</div>' +
         '<div class="visualization" id="visualization">' +
             '<div class="color-legend">' +
-                '<div id="legendText" contenteditable="true" style="padding: 8px 4px; color: black; font-size: 9px; font-weight: bold; line-height: 1.3; text-align: center; z-index: 12; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; outline: none; cursor: text;">' +
+                '<div id="legendText" contenteditable="' + (state.legendEditing ? 'true' : 'false') + '" style="padding: 8px 4px; color: black; font-size: 8px; font-weight: bold; line-height: 1.3; text-align: center; z-index: 12; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; outline: none; ' + (state.legendEditing ? 'cursor: text;' : 'cursor: default;') + '">' +
                     '<div>Hopelessness<br>Powerlessness<br>Overwhelmed<br>Anger/Resentful<br>Easily Agitated</div>' +
                     '<div style="margin-top: 4px;">Drivenness<br>Worry/Anxiety<br>Hypervigilance<br>On Edge<br>Fear of Failure</div>' +
-                    '<div style="margin-top: 4px;">Rest is Forced<br>Recovering<br>Grounded<br>Calm/Regulated<br>Quality Sleep</div>' +
+                    '<div style="margin-top: 4px;">Rest is Forced<br>Deeper Sleep<br>Grounded<br>Calm/Regulated<br>Recovering</div>' +
                     '<div style="margin-top: 4px;">Flexibility<br>Joy/Enthusiasm<br>Expansiveness<br>Opportunity<br>Freedom</div>' +
                 '</div>' +
-                '<button onclick="saveLegendText()" style="position: absolute; bottom: 5px; right: 5px; padding: 4px 8px; background: #16a34a; color: white; border: none; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; z-index: 13;">💾 Save</button>' +
+                '<button onclick="toggleLegendEdit()" style="position: absolute; bottom: 5px; right: 5px; padding: 3px 6px; background: ' + (state.legendEditing ? '#16a34a' : '#3b82f6') + '; color: white; border: none; border-radius: 3px; font-size: 7px; font-weight: 600; cursor: pointer; z-index: 13;">' + (state.legendEditing ? '💾 Save' : '✏️ Edit') + '</button>' +
             '</div>' +
             '<svg viewBox="0 0 600 300" preserveAspectRatio="none">' +
                 '<defs>' +
@@ -290,13 +290,76 @@ state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('
     '</div>';
 }
 
-// Legend text save/load functions
-function saveLegendText() {
-    const legendText = document.getElementById('legendText');
-    if (legendText) {
-        const content = legendText.innerHTML;
-        saveToUserStorage('legendText', content);
-        alert('✅ Legend text saved!');
+// Legend text edit/save toggle
+function toggleLegendEdit() {
+    if (state.legendEditing) {
+        // Save mode - save the text
+        const legendText = document.getElementById('legendText');
+        if (legendText) {
+            const content = legendText.innerHTML;
+            state.legendEditing = false;
+            
+            // Save to localStorage
+            saveToUserStorage('legendText', content);
+            
+            // Save to Firestore
+            saveLegendToFirestore(content);
+            
+            render();
+        }
+    } else {
+        // Edit mode - enable editing
+        state.legendEditing = true;
+        render();
+    }
+}
+
+async function saveLegendToFirestore(legendContent) {
+    const user = window.currentUser;
+    if (!user || !window.db) {
+        console.log('No user or Firestore not initialized, skipping legend save');
+        return;
+    }
+    
+    try {
+        await db.collection('users').doc(user.uid).set({
+            legendText: legendContent,
+            legendUpdated: new Date().toISOString()
+        }, { merge: true });
+        
+        console.log('Legend text saved to Firestore');
+    } catch (error) {
+        console.error('Error saving legend to Firestore:', error);
+    }
+}
+
+async function loadLegendFromFirestore() {
+    const user = window.currentUser;
+    if (!user || !window.db) {
+        console.log('No user or Firestore not initialized');
+        loadLegendText(); // Fallback to localStorage
+        return;
+    }
+    
+    try {
+        const doc = await db.collection('users').doc(user.uid).get();
+        
+        if (doc.exists && doc.data().legendText) {
+            const legendText = document.getElementById('legendText');
+            if (legendText) {
+                legendText.innerHTML = doc.data().legendText;
+                console.log('Loaded legend text from Firestore');
+                
+                // Save to localStorage as backup
+                saveToUserStorage('legendText', doc.data().legendText);
+            }
+        } else {
+            console.log('No legend text found in Firestore, loading from localStorage');
+            loadLegendText();
+        }
+    } catch (error) {
+        console.error('Error loading legend from Firestore:', error);
+        loadLegendText(); // Fallback to localStorage
     }
 }
 
