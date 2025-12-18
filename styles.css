@@ -268,7 +268,7 @@ textarea {
     left: 10px;
     top: 10px;
     bottom: 10px;
-    width: 80px;
+    width: 90px;
     background: linear-gradient(to bottom,
         #ff4444 0%,
         #ff4444 5%,
@@ -313,7 +313,7 @@ textarea {
     flex-direction: column;
     justify-content: flex-start;
     z-index: 5;
-    transform: translateX(-60px);
+    transform: translateX(-40px);
 }
 
 .gate-bottom {
@@ -326,7 +326,7 @@ textarea {
     flex-direction: column;
     justify-content: flex-end;
     z-index: 5;
-    transform: translateX(-60px);
+    transform: translateX(-40px);
 }
 
 .gate-shape-top, .gate-shape-bottom {
