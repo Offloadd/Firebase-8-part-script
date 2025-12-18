@@ -5,6 +5,7 @@
 function toggleAreaVisible(category, key) {
     state[category][key].visible = !state[category][key].visible;
     saveState();
+    saveCustomSlidersToFirestore(); // Sync visibility to Firestore
     render();
 }
 
