@@ -2,17 +2,16 @@
 
 function render() {
 const html =
-‘<div class="card header" style="padding: 12px;">’ +
-‘<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">’ +
-‘<div style="display: flex; align-items: center; gap: 12px;">’ +
-‘<h1 style="margin: 0;">Offload</h1>’ +
-‘<div class="subtitle" style="margin: 0;">An emotion tolerance and shadow work companion.</div>’ +
-‘</div>’ +
-‘<button class="btn" onclick="openIntroModal()" style="padding: 6px 12px; font-size: 13px; background: #6366f1; color: white; white-space: nowrap;">ℹ️ Intro</button>’ +
-‘</div>’ +
-‘</div>’ +
+'<div class="card header" style="padding: 12px;">' +
+'<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">' +
+'<div style="display: flex; align-items: center; gap: 12px;">' +
+'<h1 style="margin: 0;">Offload</h1>' +
+'<div class="subtitle" style="margin: 0;">An emotion tolerance and shadow work companion.</div>' +
+'</div>' +
+'<button class="btn" onclick="openIntroModal()" style="padding: 6px 12px; font-size: 13px; background: #6366f1; color: white; white-space: nowrap;">ℹ️ Intro</button>' +
+'</div>' +
+'</div>' +
 
-```
     '<div class="card" style="text-align: center; padding: 12px; margin-bottom: 12px;">' +
         '<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">' +
             '<div style="font-size: 16px; font-weight: 600; color: #111827;">Where would you like to start?</div>' +
@@ -91,39 +90,37 @@ const opportunityLoad = getOpportunityLoad();
 const regulatedLoad = getRegulatedLoad();
 setTimeout(() => updateVisualization(threatLoad, opportunityLoad, regulatedLoad), 0);
 displayEntries();
-```
-
 }
+
 // render.js - Part 2 Helper Function (Sections 3-4, Visualization, Save Button)
 
 function renderPart2() {
-return ‘<div class=“section-card section-teal ’ + (state.section3Expanded ? ‘expanded’ : ‘’) + ‘” ’ +
-(state.section3Expanded ? ‘’ : ‘onclick=“event.stopPropagation(); toggleSection(3)”’) + ‘>’ +
-‘<div class="section-header">’ +
-‘<div>’ +
-‘<div class="section-title">3. Known Supports & Stabilizers</div>’ +
-(state.section3Expanded ? ‘’ : ‘<div class="section-subtitle">What's holding me?</div>’) +
-‘</div>’ +
-‘<button class="expand-btn" onclick="event.stopPropagation(); toggleSection(3)" style="background: #3b82f6;">’ +
-(state.section3Expanded ? ‘Hide ▲’ : ‘Show ▼’) +
-‘</button>’ +
-‘</div>’ +
+return '<div class="section-card section-teal ' + (state.section3Expanded ? 'expanded' : '') + '" ' +
+(state.section3Expanded ? '' : 'onclick="event.stopPropagation(); toggleSection(3)"') + '>' +
+'<div class="section-header">' +
+'<div>' +
+'<div class="section-title">3. Known Supports & Stabilizers</div>' +
+(state.section3Expanded ? '' : '<div class="section-subtitle">What's holding me?</div>') +
+'</div>' +
+'<button class="expand-btn" onclick="event.stopPropagation(); toggleSection(3)" style="background: #3b82f6;">' +
+(state.section3Expanded ? 'Hide ▲' : 'Show ▼') +
+'</button>' +
+'</div>' +
 (state.section3Expanded ?
-‘<div style="margin-top: 12px;">’ +
-buildSlider(‘supports’, ‘housingComforts’, ‘Self Care Supports’, ‘+5 Enjoying comforts’, ‘-5 Isolated/depleted’, getBaselineSliderGradient()) +
-buildSlider(‘supports’, ‘sleepQuality’, ‘Sleep Quality’, ‘+5 Restorative sleep’, ‘-5 Poor/no sleep’, getBaselineSliderGradient()) +
-buildSlider(‘supports’, ‘socialConnection’, ‘Social Connection’, ‘+5 Connected/supported’, ‘-5 Isolated/alone’, getBaselineSliderGradient()) +
-buildSlider(‘supports’, ‘financialCushion’, ‘Financial Cushion’, ‘+5 Secure/comfortable’, ‘-5 Precarious/stressed’, getBaselineSliderGradient()) +
-state.customSupports.map(slider => buildCustomSlider(‘supports’, slider)).join(’’) +
-’<button class=“btn” onclick=“addCustomSlider('supports')” ’ +
-‘style=“background: #f97316; color: white; width: 100%; padding: 10px; margin-top: 9px;”>’ +
-‘+ Add Custom Slider’ +
-‘</button>’ +
-‘</div>’
-: ‘’) +
-‘</div>’ +
+'<div style="margin-top: 12px;">' +
+buildSlider('supports', 'housingComforts', 'Self Care Supports', '+5 Enjoying comforts', '-5 Isolated/depleted', getBaselineSliderGradient()) +
+buildSlider('supports', 'sleepQuality', 'Sleep Quality', '+5 Restorative sleep', '-5 Poor/no sleep', getBaselineSliderGradient()) +
+buildSlider('supports', 'socialConnection', 'Social Connection', '+5 Connected/supported', '-5 Isolated/alone', getBaselineSliderGradient()) +
+buildSlider('supports', 'financialCushion', 'Financial Cushion', '+5 Secure/comfortable', '-5 Precarious/stressed', getBaselineSliderGradient()) +
+state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('') +
+'<button class="btn" onclick="addCustomSlider(\'supports\')" ' +
+'style="background: #f97316; color: white; width: 100%; padding: 10px; margin-top: 9px;">' +
+'+ Add Custom Slider' +
+'</button>' +
+'</div>'
+: '') +
+'</div>' +
 
-```
     '<div class="section-card section-orange ' + (state.section4Expanded ? 'expanded' : '') + '" ' +
          (state.section4Expanded ? '' : 'onclick="event.stopPropagation(); toggleSection(4)"') + '>' +
         '<div class="section-header">' +
@@ -223,7 +220,7 @@ state.customSupports.map(slider => buildCustomSlider(‘supports’, slider)).jo
         '</div>' +
         '<div class="visualization" id="visualization">' +
             '<div class="color-legend">' +
-                '<div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; background: rgba(255, 255, 255, ' + state.visualOpacity + '); border-radius: 5px; z-index: 10;"></div>' +
+                '<div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; background: rgba(255, 255, 255, 0); border-radius: 5px; z-index: 10;"></div>' +
                 '<div style="position: absolute; top: 1.3%; left: 50%; transform: translateX(-50%); color: black; font-size: 10px; font-weight: bold; text-align: center; z-index: 12; width: 90%; padding: 4px;">' +
                     'Hopelessness,<br>Powerlessness,<br>Overwhelmed,<br>Anger/Resentful,<br>Easily Agitated,' +
                 '</div>' +
@@ -296,6 +293,4 @@ state.customSupports.map(slider => buildCustomSlider(‘supports’, slider)).jo
     '<div class="card">' +
         '<div id="entriesContainer"></div>' +
     '</div>';
-```
-
 }
