@@ -90,6 +90,7 @@ const opportunityLoad = getOpportunityLoad();
 const regulatedLoad = getRegulatedLoad();
 setTimeout(() => updateVisualization(threatLoad, opportunityLoad, regulatedLoad), 0);
 displayEntries();
+loadLegendText();
 }
 
 // render.js - Part 2 Helper Function (Sections 3-4, Visualization, Save Button)
@@ -220,19 +221,13 @@ state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('
         '</div>' +
         '<div class="visualization" id="visualization">' +
             '<div class="color-legend">' +
-                '<div style="position: absolute; top: 0; left: 0; right: 0; height: 100%; background: rgba(255, 255, 255, 0); border-radius: 5px; z-index: 10;"></div>' +
-                '<div style="position: absolute; top: 1.3%; left: 50%; transform: translateX(-50%); color: black; font-size: 10px; font-weight: bold; text-align: center; z-index: 12; width: 90%; padding: 4px;">' +
-                    'Hopelessness,<br>Powerlessness,<br>Overwhelmed,<br>Anger/Resentful,<br>Easily Agitated,' +
+                '<div id="legendText" contenteditable="true" style="padding: 8px 4px; color: black; font-size: 8px; font-weight: bold; line-height: 1.3; text-align: center; z-index: 12; display: flex; flex-direction: column; justify-content: space-evenly; height: 100%; outline: none; cursor: text;">' +
+                    '<div>Hopelessness<br>Powerlessness<br>Overwhelmed<br>Anger/Resentful<br>Easily Agitated</div>' +
+                    '<div style="margin-top: 4px;">Drivenness<br>Worry/Anxiety<br>Hypervigilance<br>On Edge<br>Fear of Failure</div>' +
+                    '<div style="margin-top: 4px;">Rest is Forced<br>Deeper Sleep<br>Grounded<br>Calm/Regulated<br>Recovering</div>' +
+                    '<div style="margin-top: 4px;">Flexibility<br>Joy/Enthusiasm<br>Expansiveness<br>Opportunity<br>Freedom</div>' +
                 '</div>' +
-                '<div style="position: absolute; top: 26.3%; left: 50%; transform: translateX(-50%); color: black; font-size: 10px; font-weight: bold; text-align: center; z-index: 12; width: 90%; padding: 4px;">' +
-                    'Drivenness,<br>Worry/Anxiety,<br>Hypervigilance,<br>On Edge,<br>Fear of Failure' +
-                '</div>' +
-                '<div style="position: absolute; top: 51.3%; left: 50%; transform: translateX(-50%); color: black; font-size: 10px; font-weight: bold; text-align: center; z-index: 12; width: 90%; padding: 4px;">' +
-                    'Rest is Forced<br>Deeper Sleep<br>Grounded<br>Calm/Regulated<br>Recovering' +
-                '</div>' +
-                '<div style="position: absolute; top: 76.3%; left: 50%; transform: translateX(-50%); color: black; font-size: 10px; font-weight: bold; text-align: center; z-index: 12; width: 90%; padding: 4px;">' +
-                    'Flexibility,<br>Joy/Enthusiasm,<br>Expansiveness,<br>Opportunity,<br>Freedom' +
-                '</div>' +
+                '<button onclick="saveLegendText()" style="position: absolute; bottom: 5px; right: 5px; padding: 4px 8px; background: #16a34a; color: white; border: none; border-radius: 4px; font-size: 10px; font-weight: 600; cursor: pointer; z-index: 13;">💾 Save</button>' +
             '</div>' +
             '<svg viewBox="0 0 600 300" preserveAspectRatio="none">' +
                 '<defs>' +
@@ -293,4 +288,22 @@ state.customSupports.map(slider => buildCustomSlider('supports', slider)).join('
     '<div class="card">' +
         '<div id="entriesContainer"></div>' +
     '</div>';
+}
+
+// Legend text save/load functions
+function saveLegendText() {
+    const legendText = document.getElementById('legendText');
+    if (legendText) {
+        const content = legendText.innerHTML;
+        saveToUserStorage('legendText', content);
+        alert('✅ Legend text saved!');
+    }
+}
+
+function loadLegendText() {
+    const saved = loadFromUserStorage('legendText');
+    const legendText = document.getElementById('legendText');
+    if (saved && legendText) {
+        legendText.innerHTML = saved;
+    }
 }
